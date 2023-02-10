@@ -1,0 +1,110 @@
+[08/02, 11:40 pm] Isaac Abishek777: @Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String username;
+    private String password;
+    // other fields and getters/setters
+}
+[08/02, 11:40 pm] Isaac Abishek777: R
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUsername(String username);
+}
+[08/02, 11:40 pm] Isaac Abishek777: C
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @PostMapping("/register")
+    public User register(@RequestBody User user) {
+        // save the user and return it
+        return userRepository.save(user);
+    }
+
+    @PostMapping("/login")
+    public User login(@RequestBody User user) {
+        // check if the user exists and return it
+        return userRepository.findByUsername(user.getUsername());
+    }
+}
+[08/02, 11:40 pm] Isaac Abishek777: @Entity
+public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String title;
+    private String showtimes;
+    private String theater;
+    // other fields and getters/setters
+}
+[08/02, 11:40 pm] Isaac Abishek777: public interface MovieRepository extends JpaRepository<Movie, Long> {
+    Movie findByTitle(String title);
+}
+[08/02, 11:40 pm] Isaac Abishek777: @RestController
+@RequestMapping("/movies")
+public class MovieController {
+
+    @Autowired
+    private MovieRepository movieRepository;
+
+    @GetMapping("/{title}")
+    public Movie getMovie(@PathVariable String title) {
+        // return the movie with the specified title
+        return movieRepository.findByTitle(title);
+    }
+}
+[08/02, 11:40 pm] Isaac Abishek777: @Entity
+public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String title;
+    private String showtimes;
+    private String theater;
+    // other fields and getters/setters
+}
+[08/02, 11:40 pm] Isaac Abishek777: @RestController
+@RequestMapping("/movies")
+public class MovieController {
+
+    @Autowired
+    private MovieRepository movieRepository;
+
+    @GetMapping("/{title}")
+    public Movie getMovie(@PathVariable String title) {
+        // return the movie with the specified title
+        return movieRepository.findByTitle(title);
+    }
+}
+[08/02, 11:40 pm] Isaac Abishek777: @Entity
+public class Ticket {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private int numberOfTicket;
+    private double totalAmount;
+    // other fields and getters/setters
+}
+[08/02, 11:40 pm] Isaac Abishek777: @RestController
+@RequestMapping("/tickets")
+public class TicketController {
+
+    @Autowired
+    private TicketRepository ticketRepository;
+
+    @PostMapping("/book")
+    public Ticket book(@RequestBody Ticket ticket) {
+        // save the ticket and return it
+        return ticketRepository.save(ticket);
+    }
+
+    @GetMapping("/{numberOfTicket}")
+    public Ticket getTicket(@PathVariable int numberOfTicket) {
+        // return the ticket with the
+[08/02, 11:40 pm] Isaac Abishek777: public interface TicketRepository extends JpaRepository<Ticket, Long> {
+    Ticket findByNumberOfTicket(int numberOfTicket);
+}
